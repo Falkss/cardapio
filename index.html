@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cardápio Digital</title>
+<meta name="description" content="Hambúrgueres artesanais grelhados na brasa. Confira nosso cardápio completo, combos, porções, bebidas e sobremesas.">
+
+<!--
+  ===================== CONFIGURAÇÃO RÁPIDA =========================
+  Guia rápido para editar este cardápio SEM precisar entender programação.
+  Use Ctrl+F (ou Cmd+F no Mac) e procure pelas palavras-chave abaixo
+  para pular direto para o que você quer alterar.
+
+  1. NOME DA HAMBURGUERIA
+     -> Procure por: "NOME DA MARCA"
+     -> Aparece na Navbar, no Hero e no Rodapé.
+
+  2. LOGO
+     -> Procure por: "LOGO AQUI"
+     -> Hoje o logo é só o nome em texto. Se quiser trocar por uma
+       imagem, substitua o texto dentro da tag <a class="logo"> por
+       uma tag <img src="sua-imagem.png">.
+
+  3. IMAGENS (hambúrgueres, combos, porções, bebidas, sobremesas, banners)
+     -> Procure por: "Troque a imagem abaixo"
+     -> Basta trocar o link dentro de src="..." por outro link de imagem
+       (pode usar Unsplash, Pexels, Pixabay ou uma imagem sua hospedada).
+
+  4. PREÇOS
+     -> Procure por: "Troque o preço abaixo"
+     -> Basta editar o número. Use sempre R$ na frente. Ex: R$ 32,90
+
+  5. DESCRIÇÕES E INGREDIENTES
+     -> Procure por: "Troque a descrição abaixo" e "Troque os ingredientes abaixo"
+
+  6. ADICIONAR NOVO PRODUTO
+     -> Copie um bloco inteiro de produto (do comentário
+       "INÍCIO DO PRODUTO" até "FIM DO PRODUTO") e cole logo abaixo
+       do último produto da mesma categoria. Depois é só editar nome,
+       imagem, descrição, ingredientes, preço e badge.
+
+  7. REMOVER PRODUTO
+     -> Apague o bloco inteiro do produto, do comentário
+       "INÍCIO DO PRODUTO" até "FIM DO PRODUTO" (incluindo os dois).
+
+  8. WHATSAPP
+     -> Procure por: "SEU NUMERO AQUI"
+     -> Troque pelo número completo com código do país. Ex: 5511999998888
+     -> Esse número é usado no botão flutuante E no rodapé.
+
+  9. INSTAGRAM
+     -> Procure por: "SEU INSTAGRAM AQUI"
+     -> Troque pelo link do seu perfil.
+
+  10. ENDEREÇO
+     -> Procure por: "SEU ENDEREÇO AQUI"
+
+  11. HORÁRIO DE FUNCIONAMENTO
+     -> Procure por: "SEU HORARIO AQUI"
+
+  12. TELEFONE
+     -> Procure por: "SEU TELEFONE AQUI"
+
+  13. MAPA (Google Maps)
+     -> Procure por: "SEU MAPA AQUI"
+     -> Para trocar: vá ao Google Maps, busque seu endereço, clique em
+       "Compartilhar" > "Incorporar um mapa" > copie o link do src="..."
+       e cole no lugar do link atual do iframe.
+
+  ARQUIVOS DO PROJETO:
+     index.html  -> Estrutura e conteúdo (textos, preços, imagens)
+     style.css   -> Toda a aparência (cores, fontes, espaçamentos)
+     script.js   -> Comportamentos (menu mobile, scroll suave, animações)
+
+  Dica: as cores e fontes do site inteiro ficam centralizadas no topo
+  do arquivo style.css, dentro de ":root { ... }". Trocar uma cor ali
+  muda o site inteiro automaticamente.
+  ====================================================================
+-->
+
+<!-- Fontes do Google Fonts: Anton (títulos impactantes) + Poppins (texto) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Ícones (Font Awesome via CDN) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- Folha de estilos própria -->
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ====================================================================
+     LOADING SCREEN
+     Tela de carregamento exibida enquanto a página abre.
+     Some automaticamente via script.js.
+==================================================================== -->
+<div id="loading-screen">
+  <div class="loader-content">
+    <div class="loader-flame">🔥</div>
+    <p class="loader-text"> Venha conferir</p>
+  </div>
+</div>
+
+<!-- ====================================================================
+     NAVBAR FIXA
+     Fica transparente no topo e ganha fundo sólido ao rolar a página
+     (comportamento controlado em script.js).
+==================================================================== -->
+<header id="navbar">
+  <nav class="nav-container">
+
+    <!-- LOGO AQUI: troque o nome/texto ou substitua por uma <img> -->
+    <a href="#inicio" class="logo">
+      <span class="logo-icon">🔥</span>
+      <!-- NOME DA MARCA -->
+      <span class="logo-text">Beli Burguer <span class="logo-accent">
+    </a>
+
+    <!-- Links do menu - todos com scroll suave (data-scroll) -->
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#inicio" class="nav-link">Início</a></li>
+      <li><a href="#cardapio" class="nav-link">Cardápio</a></li>
+      <li><a href="#combos" class="nav-link">Combos</a></li>
+      <li><a href="#porcoes" class="nav-link">Porções</a></li>
+      <li><a href="#bebidas" class="nav-link">Bebidas</a></li>
+      <li><a href="#sobremesas" class="nav-link">Sobremesas</a></li>
+      <li><a href="#contato" class="nav-link">Contato</a></li>
+    </ul>
+
+    <!-- Botão de pedido rápido pelo WhatsApp (aparece na navbar em telas maiores) -->
+    <a href="https://wa.me/5571985549179" target="_blank" rel="noopener" class="nav-cta">
+      <i class="fa-brands fa-whatsapp"></i> Peça Agora
+    </a>
+
+    <!-- Botão hambúrguer (menu mobile) -->
+    <button id="menu-toggle" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<!-- ====================================================================
+     HERO
+     Seção de abertura com foto grande, nome, slogan e CTA.
+     Troque a imagem de fundo em style.css, na classe ".hero" (background-image),
+     ou troque a imagem abaixo caso prefira usar uma tag <img>.
+==================================================================== -->
+<section id="inicio" class="hero">
+  <div class="hero-overlay"></div>
+
+  <!-- Brasas decorativas (efeito parallax leve, ver script.js) -->
+  <div class="hero-embers" data-parallax></div>
+
+  <div class="hero-content" data-reveal>
+    <span class="hero-eyebrow">Grelhados na brasa desde 2023</span>
+
+    <!-- NOME DA MARCA (título principal do Hero) -->
+    <h1 class="hero-title">Beli Burger</h1>
+
+    <!-- Slogan - troque o texto abaixo -->
+    <p class="hero-slogan">Hambúrgueres artesanais, pão brioche na chapa e outras delicias.</p>
+
+    <div class="hero-buttons">
+      <a href="#cardapio" class="btn btn-primary">Ver Cardápio <i class="fa-solid fa-arrow-down"></i></a>
+      <a href="https://wa.me/5571985549179" target="_blank" rel="noopener" class="btn btn-outline">
+        <i class="fa-brands fa-whatsapp"></i> Peça pelo WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <!-- Indicador de scroll -->
+  <div class="scroll-indicator"><span></span></div>
+</section>
+
+<!-- ====================================================================
+     CARDÁPIO PRINCIPAL (HAMBÚRGUERES)
+     Cada hambúrguer é um bloco 100% independente e comentado.
+     Para adicionar um novo produto, copie um bloco inteiro
+     "INÍCIO DO PRODUTO" -> "FIM DO PRODUTO" e cole abaixo.
+==================================================================== -->
+<section id="cardapio" class="section">
+  <div class="container">
+
+    <div class="section-header" data-reveal>
+      <span class="section-eyebrow">Nosso Cardápio</span>
+      <h2 class="section-title">Hambúrgueres Artesanais</h2>
+      <p class="section-subtitle">Blend 100% bovino, moído na casa, grelhado na brasa e montado na hora.</p>
+    </div>
+
+    <div class="cards-grid">
+
+      <!-- =========================================================
+           INÍCIO DO PRODUTO - HAMBÚRGUER 1
+           Troque o nome abaixo
+           Troque o preço abaixo
+           Troque a descrição abaixo
+           Troque os ingredientes abaixo
+           Troque a imagem abaixo
+           Troque o badge abaixo (ou remova a div .card-badge inteira)
+      ========================================================== -->
+      <article class="card product-card" data-reveal>
+        <div class="card-image">
+          <!-- Troque a imagem abaixo -->
+          <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&w=800&q=80" alt="Beli Burger" loading="lazy">
+          <!-- Troque o badge abaixo: Promoção / Novo / Mais Vendido -->
+          <span class="card-badge badge-bestseller">Mais Vendido</span>
+        </div>
+        <div class="card-body">
+          <!-- Troque o nome abaixo -->
+          <h3 class="card-title">Beli Burger</h3>
+          <!-- Troque a descrição abaixo -->
+          <p class="card-desc">O queridinho da casa. Duas carnes smash suculentas com aquela casquinha crocante característica.</p>
+          <!-- Troque os ingredientes abaixo -->
+          <p class="card-ingredients"><strong>Ingredientes:</strong> Pão brioche, 2x blend smash 90g, queijo cheddar, alface americana, tomate, cebola roxa e molho especial da casa.</p>
+          <div class="card-footer">
+            <!-- Troque o preço abaixo -->
+            <span class="card-price">R$ 28,90</span>
+            <a href="https://wa.me/5571985549179?text=Quero%20pedir%20o%20Smash%20Cl%C3%A1ssico!" target="_blank" rel="noopener" class="card-btn">Pedir <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+      <!-- FIM DO PRODUTO - HAMBÚRGUER 1 -->
+
+      <!-- =========================================================
+           INÍCIO DO PRODUTO - HAMBÚRGUER 2
+           Troque o nome abaixo
+           Troque o preço abaixo
+           Troque a descrição abaixo
+           Troque os ingredientes abaixo
+           Troque a imagem abaixo
+      ========================================================== -->
+      <article class="card product-card" data-reveal>
+        <div class="card-image">
+          <!-- Troque a imagem abaixo -->
+          <img src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?auto=format&fit=crop&w=800&q=80" alt="Bacon Explosion" loading="lazy">
+          <span class="card-badge badge-new">Novo</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Beli Smash Bacon</h3>
+          <p class="card-desc">Para quem não abre mão de bacon em dobro e uma generosa camada de queijo derretido.</p>
+          <p class="card-ingredients"><strong>Ingredientes:</strong> Pão brioche, blend 160g, cheddar duplo, bacon crocante em lascas, cebola caramelizada e maionese defumada.</p>
+          <div class="card-footer">
+            <span class="card-price">R$ 34,90</span>
+            <a href="https://wa.me/5571985549179?text=Quero%20pedir%20o%20Bacon%20Explosion!" target="_blank" rel="noopener" class="card-btn">Pedir <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+      <!-- FIM DO PRODUTO - HAMBÚRGUER 2 -->
+
+      <!-- =========================================================
+           INÍCIO DO PRODUTO - HAMBÚRGUER 3
+      ========================================================== -->
+      <article class="card product-card" data-reveal>
+        <div class="card-image">
+          <!-- Troque a imagem abaixo -->
+          <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=80" alt="Cheddar Duplo" loading="lazy">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Bacon Furioso</h3>
+          <p class="card-desc">Simplicidade que funciona: muito queijo cheddar derretendo sobre uma carne suculenta.</p>
+          <p class="card-ingredients"><strong>Ingredientes:</strong> Pão brioche, blend 150g, fatias duplas de cheddar, picles e molho barbecue da casa.</p>
+          <div class="card-footer">
+            <span class="card-price">R$ 26,90</span>
+            <a href="https://wa.me/5571985549179?text=Quero%20pedir%20o%20Cheddar%20Duplo!" target="_blank" rel="noopener" class="card-btn">Pedir <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+      <!-- FIM DO PRODUTO - HAMBÚRGUER 3 -->
+
+      <!-- =========================================================
+           INÍCIO DO PRODUTO - HAMBÚRGUER 4
+      ========================================================== -->
+      <article class="card product-card" data-reveal>
+        <div class="card-image">
+          <!-- Troque a imagem abaixo -->
+          <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=800&q=80" alt="BBQ Ranch" loading="lazy">
+          <span class="card-badge badge-promo">Promoção</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Mafioso</h3>
+          <p class="card-desc">Doce, defumado e cremoso. Um mergulho no melhor do churrasco americano.</p>
+          <p class="card-ingredients"><strong>Ingredientes:</strong> Pão brioche, blend 150g, cheddar, anéis de cebola empanados, molho barbecue e molho ranch.</p>
+          <div class="card-footer">
+            <span class="card-price"><del class="old-price">R$ 36,90</del> R$ 31,90</span>
+            <a href="https://wa.me/5571985549179?text=Quero%20pedir%20o%20BBQ%20Ranch!" target="_blank" rel="noopener" class="card-btn">Pedir <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+      <!-- FIM DO PRODUTO - HAMBÚRGUER 4 -->
+
+      <!-- =========================================================
+           INÍCIO DO PRODUTO - HAMBÚRGUER 5
+      ========================================================== -->
+      <article class="card product-card" data-reveal>
+        <div class="card-image">
+          <!-- Troque a imagem abaixo -->
+          <img src="https://images.unsplash.com/photo-1607013251379-e6eecfffe234?auto=format&fit=crop&w=800&q=80" alt="Duplo na Brasa" loading="lazy">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Double Cheddar Burger</h3>
+          <p class="card-desc">Para quem chegou com fome de verdade. Duas carnes grelhadas na brasa, altura dupla.</p>
+          <p class="card-ingredients"><strong>Ingredientes:</strong> Pão brioche, 2x blend 120g, queijo prato, alface, tomate e maionese da casa.</p>
+          <div class="card-footer">
+            <span class="card-price">R$ 38,90</span>
+            <a href="https://wa.me/5571985549179?text=Quero%20pedir%20o%20Duplo%20na%20Brasa!" target="_blank" rel="noopener" class="card-btn">Pedir <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+      <!-- FIM DO PRODUTO - HAMBÚRGUER 5 -->
+
+      <!-- =========================================================
+           INÍCIO DO PRODUTO - HAMBÚRGUER 6
+      ========================================================== -->
+      <article class="card product-card" data-reveal>
+        <div class="card-image">
+          <!-- Troque a imagem abaixo -->
+          <img src="https://images.unsplash.com/photo-1598214886806-c87b84b7078b?auto=format&fit=crop&w=800&q=80" alt="Frango Crocante" loading="lazy">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Cheddar Burger</h3>
+          <p class="card-desc">Filé de frango empanado na hora, crocante por fora e macio por dentro.</p>
+          <p class="card-ingredients"><strong>Ingredientes:</strong> Pão brioche, filé de frango empanado, queijo muçarela, alface, tomate e maionese temperada.</p>
+          <div class="card-footer">
+            <span class="card-price">R$ 27,90</span>
+            <a href="https://wa.me/5571985549179?text=Quero%20pedir%20o%20Frango%20Crocante!" target="_blank" rel="noopener" class="card-btn">Pedir <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+      <!-- FIM DO PRODUTO - HAMBÚRGUER 6 -->
+
+      <!-- =========================================================
+           INÍCIO DO PRODUTO - HAMBÚRGUER 7
+      ========================================================== -->
+      <article class="card product-card" data-reveal>
+        <div class="card-image">
+          <!-- Troque a imagem abaixo -->
+          <img src="https://images.unsplash.com/photo-1520072959219-c595dc870360?auto=format&fit=crop&w=800&q=80" alt="Veggie Grelhado" loading="lazy">
+          <span class="card-badge badge-new">Novo</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Tentação burger</h3>
+          <p class="card-desc">Opção vegetariana que não deixa a desejar em sabor. Hambúrguer de grão-de-bico e legumes grelhados.</p>
+          <p class="card-ingredients"><strong>Ingredientes:</strong> Pão brioche, hambúrguer de grão-de-bico, queijo muçarela, rúcula, tomate seco e maionese vegana.</p>
+          <div class="card-footer">
+            <span class="card-price">R$ 29,90</span>
+            <a href="https://wa.me/5571985549179?text=Quero%20pedir%20o%20Veggie%20Grelhado!" target="_blank" rel="noopener" class="card-btn">Pedir <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+      <!-- FIM DO PRODUTO - HAMBÚRGUER 7 -->
+
+      <!-- =========================================================
+           INÍCIO DO PRODUTO - HAMBÚRGUER 8
+      ========================================================== -->
+      <article class="card product-card" data-reveal>
+        <div class="card-image">
+          <!-- Troque a imagem abaixo -->
+          <img src="https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?auto=format&fit=crop&w=800&q=80" alt="Fogo Picante" loading="lazy">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Beli magnifico</h3>
+          <p class="card-desc">Para quem gosta de sentir a brasa de verdade. Nível de pimenta ajustável no pedido.</p>
+          <p class="card-ingredients"><strong>Ingredientes:</strong> Pão brioche, blend 150g, queijo pepper jack, jalapeños, cebola roxa e molho picante da casa.</p>
+          <div class="card-footer">
+            <span class="card-price">R$ 32,90</span>
+            <a href="https://wa.me/5571985549179?text=Quero%20pedir%20o%20Fogo%20Picante!" target="_blank" rel="noopener" class="card-btn">Pedir <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+      <!-- FIM DO PRODUTO - HAMBÚRGUER 8 -->
+
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================
+     COMBOS
+     Fundo com textura de madeira. Troque em style.css (.combos-section).
+==================================================================== -->
+<section id="combos" class="section combos-section">
+  <div class="section-bg-overlay"></div>
+  <div class="container">
+
+    <div class="section-header" data-reveal>
+      <span class="section-eyebrow">Combos</span>
+      <h2 class="section-title">Combos Fogo &amp; Brasa</h2>
+      <p class="section-subtitle">Hambúrguer + acompanhamento + bebida, com preço especial.</p>
+    </div>
+
+    <div class="cards-grid">
+
+      <!-- =========================================================
+           INÍCIO DO PRODUTO - COMBO 1
+      ========================================================== -->
+      <article class="card product-card" data-reveal>
+        <div class="card-image">
+          <!-- Troque a imagem abaixo -->
+          <img src="https://images.unsplash.com/photo-1610614819513-58e34989848b?auto=format&fit=crop&w=800&q=80" alt="Combo Clássico" loading="lazy">
+          <span class="card-badge badge-bestseller">Mais Vendido</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Combo Clássico</h3>
+          <p class="card-desc">O básico bem feito, na medida certa para matar a fome.</p>
+          <p class="card-ingredients"><strong>Inclui:</strong> Beli Burger + Batata Frita Média + Refrigerante Lata.</p>
+          <div class="card-footer">
+            <span class="card-price">R$ 42,90</span>
+            <a href="https://wa.me/5571985549179?text=Quero%20pedir%20o%20Combo%20Cl%C3%A1ssico!" target="_blank" rel="noopener" class="card-btn">Pedir <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+      <!-- FIM DO PRODUTO - COMBO 1 -->
+
+      <!-- =========================================================
+           INÍCIO DO PRODUTO - COMBO 2
+      ========================================================== -->
+      <article class="card product-card" data-reveal>
+        <div class="card-image">
+          <!-- Troque a imagem abaixo -->
+          <img src="https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?auto=format&fit=crop&w=800&q=80" alt="Combo Bacon" loading="lazy">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Combo Cheddar</h3>
+          <p class="card-desc">Para quem gosta de queijo com acompanhamento generoso.</p>
+          <p class="card-ingredients"><strong>Inclui:</strong> Cheddar burger + + Batata Frita Média + Refrigerante Lata.</p>
+          <div class="card-footer">
+            <span class="card-price">R$ 54,90</span>
+            <a href="https://wa.me/5571985549179?text=Quero%20pedir%20o%20Combo%20Cheddar!" target="_blank" rel="noopener" class="card-btn">Pedir <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+      <!-- FIM DO PRODUTO - COMBO 2 -->
+
+      <!-- =========================================================
+           INÍCIO DO PRODUTO - COMBO 3
+      ========================================================== -->
+      <article class="card product-card" data-reveal>
+        <div class="card-image">
+          <!-- Troque a imagem abaixo -->
+          <img src="https://images.unsplash.com/photo-1552526881-2c7cc6dedc65?auto=format&fit=crop&w=800&q=80" alt="Combo Casal" loading="lazy">
+          <span class="card-badge badge-promo">Promoção</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Combo Tentacão</h3>
+          <p class="card-desc">Feito para dividir (ou não!)</p>
+          <p class="card-ingredients"><strong>Inclui:</strong> Tentação burger + Batata Frita Média + Refrigerante Lata.</p>
+          <div class="card-footer">
+            <span class="card-price"><del class="old-price">R$ 89,90</del> R$ 74,90</span>
+            <a href="https://wa.me/5571985549179?text=Quero%20pedir%20o%20Combo%20Tentacão!" target="_blank" rel="noopener" class="card-btn">Pedir <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+      <!-- FIM DO PRODUTO - COMBO 3 -->
+
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================
+     PORÇÕES
+==================================================================== -->
+<section id="porcoes" class="section">
+  <div class="container">
+
+    <div class="section-header" data-reveal>
+      <span class="section-eyebrow">Para Compartilhar</span>
+      <h2 class="section-title">Porções</h2>
+      <p class="section-subtitle">Acompanhamentos crocantes, perfeitos para dividir com a mesa.</p>
+    </div>
+
+    <div class="cards-grid">
+
+      <!-- INÍCIO DO PRODUTO - PORÇÃO 1 -->
+      <article class="card product-card" data-reveal>
+        <div class="card-image">
+          <!-- Troque a imagem abaixo -->
+          <img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=800&q=80" alt="Batata Frita" loading="lazy">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Batata Frita</h3>
+          <p class="card-desc">Crocante por fora, macia por dentro, frita na hora.</p>
+          <p class="card-ingredients"><strong>Ingredientes:</strong> Batata rústica, sal.</p>
+          <div class="card-footer">
+            <span class="card-price">R$ 18,90</span>
+            <a href="https://wa.me/5571985549179?text=Quero%20pedir%20a%20Batata%20Frita!" target="_blank" rel="noopener" class="card-btn">Pedir <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+      <!-- FIM DO PRODUTO - PORÇÃO 1 -->
+
+      <!-- INÍCIO DO PRODUTO - PORÇÃO 2 -->
+      <article class="card product-card" data-reveal>
+        <div class="card-image">
+          <!-- Troque a imagem abaixo -->
+          <img src="https://images.unsplash.com/photo-1639024471283-03518883512d?auto=format&fit=crop&w=800&q=80" alt="Onion Rings" loading="lazy">
+          <span class="card-badge badge-new">Novo</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Onion Rings</h3>
+          <p class="card-desc">Aneis de cebola empanados e fritos até ficarem dourados e crocantes.</p>
+          <p class="card-ingredients"><strong>Ingredientes:</strong> Cebola, farinha panko e especiarias, acompanha molho barbecue.</p>
+          <div class="card-footer">
+            <span class="card-price">R$ 22,90</span>
+            <a href="https://wa.me/ ?text=Quero%20pedir%20o%20Onion%20Rings!" target="_blank" rel="noopener" class="card-btn">Pedir <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+      <!-- FIM DO PRODUTO - PORÇÃO 2 -->
+
+      <!-- INÍCIO DO PRODUTO - PORÇÃO 3 -->
+      <article class="card product-card" data-reveal>
+        <div class="card-image">
+          <!-- Troque a imagem abaixo -->
+          <img src="https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=800&q=80" alt="Nuggets Artesanais" loading="lazy">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Dourados do mar</h3>
+          <p class="card-desc">Feitos com peito de tilápia de verdade, sem processados.</p>
+          <p class="card-ingredients"><strong>Ingredientes:</strong> Tilápia empanado crocante.</p>
+          <div class="card-footer">
+            <span class="card-price">R$ 24,90</span>
+            <a href="https://wa.me/5571985549179?text=Quero%20pedir%20os%20Sticks%20de%20Tilápia!" target="_blank" rel="noopener" class="card-btn">Pedir <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+      <!-- FIM DO PRODUTO - PORÇÃO 3 -->
+
+      <!-- INÍCIO DO PRODUTO - PORÇÃO 4 -->
+      <article class="card product-card" data-reveal>
+        <div class="card-image">
+          <!-- Troque a imagem abaixo -->
+          <img src="https://images.unsplash.com/photo-1585109649139-366815a0d713?auto=format&fit=crop&w=800&q=80" alt="Batata Cheddar e Bacon" loading="lazy">
+          <span class="card-badge badge-bestseller">Mais Vendido</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Batata Beli Grill</h3>
+          <p class="card-desc">Nossa batata frita coberta com cheddar cremoso e bacon crocante.</p>
+          <p class="card-ingredients"><strong>Ingredientes:</strong> Batata rústica, molho cheddar da casa, bacon em cubos e cebolinha.</p>
+          <div class="card-footer">
+            <span class="card-price">R$ 29,90</span>
+            <a href="https://wa.me/5571985549179?text=Quero%20pedir%20a%20Batata%20Cheddar%20e%20Bacon!" target="_blank" rel="noopener" class="card-btn">Pedir <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+      <!-- FIM DO PRODUTO - PORÇÃO 4 -->
+
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================
+     BEBIDAS
+==================================================================== -->
+<section id="bebidas" class="section combos-section">
+  <div class="section-bg-overlay"></div>
+  <div class="container">
+
+    <div class="section-header" data-reveal>
+      <span class="section-eyebrow">Para Acompanhar</span>
+      <h2 class="section-title">Bebidas</h2>
+      <p class="section-subtitle">Refrigerantes, sucos naturais e mousses cremosos.</p>
+    </div>
+
+    <div class="cards-grid cards-grid-small">
+
+      <!-- INÍCIO DO PRODUTO - BEBIDA 1 -->
+      <article class="card product-card" data-reveal>
+        <div class="card-image">
+          <!-- Troque a imagem abaixo -->
+          <img src="https://images.unsplash.com/photo-1554866585-cd94860890b7?auto=format&fit=crop&w=800&q=80" alt="Refrigerante Lata" loading="lazy">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Refrigerante Lata</h3>
+          <p class="card-desc">Coca-Cola, Fanta ou pepsi geladinho.</p>
+          <div class="card-footer">
+            <span class="card-price">R$ 7,00</span>
+            <a href="https://wa.me/5571985549179?text=Quero%20pedir%20um%20Refrigerante!" target="_blank" rel="noopener" class="card-btn">Pedir <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+      <!-- FIM DO PRODUTO - BEBIDA 1 -->
+
+      <!-- INÍCIO DO PRODUTO - BEBIDA 2 -->
+      <article class="card product-card" data-reveal>
+        <div class="card-image">
+          <!-- Troque a imagem abaixo -->
+          <img src="https://images.unsplash.com/photo-1600271886742-f049cd451bba?auto=format&fit=crop&w=800&q=80" alt="Suco Natural" loading="lazy">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Suco Natural</h3>
+          <p class="card-desc">Sabores: Maracujá, Morango ou Cupuaçu.</p>
+          <div class="card-footer">
+            <span class="card-price">R$ 11,90</span>
+            <a href="https://wa.me/5571985549179?text=Quero%20pedir%20um%20Suco%20Natural!" target="_blank" rel="noopener" class="card-btn">Pedir <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+      <!-- FIM DO PRODUTO - BEBIDA 4 -->
+
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================
+     SOBREMESAS
+==================================================================== -->
+<section id="sobremesas" class="section">
+  <div class="container">
+
+    <div class="section-header" data-reveal>
+      <span class="section-eyebrow">Para Fechar com Chave de Ouro</span>
+      <h2 class="section-title">Sobremesas</h2>
+      <p class="section-subtitle">O toque doce que fecha a experiência com chave de ouro.</p>
+    </div>
+
+    <div class="cards-grid cards-grid-small">
+
+      <!-- INÍCIO DO PRODUTO - SOBREMESA 1 -->
+      <article class="card product-card" data-reveal>
+        <div class="card-image">
+          <!-- Troque a imagem abaixo -->
+          <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=80" alt="Brownie com Sorvete" loading="lazy">
+          <span class="card-badge badge-bestseller">Mais Vendido</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Açai</h3>
+          <p class="card-desc">De 200 a 500ml, a consultar adicionais</p>
+          <div class="card-footer">
+            <a href="https://wa.me/5571985549179?text=Quero%20pedir%20o%20Açai!" target="_blank" rel="noopener" class="card-btn">Pedir <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+      <!-- FIM DO PRODUTO - SOBREMESA 1 -->
+
+      <!-- INÍCIO DO PRODUTO - SOBREMESA 2 -->
+      <article class="card product-card" data-reveal>
+        <div class="card-image">
+          <!-- Troque a imagem abaixo -->
+          <img src="https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?auto=format&fit=crop&w=800&q=80" alt="Sorvete Artesanal" loading="lazy">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Mousse artesanal</h3>
+          <p class="card-desc"> 140ml do sabor que você escolher: Limão, Maracujá ou morango.</p>
+          <div class="card-footer">
+            <span class="card-price">R$ 14,90</span>
+            <a href="https://wa.me/5571985549179?text=Quero%20pedir%20um%20Mousse!" target="_blank" rel="noopener" class="card-btn">Pedir <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+      <!-- FIM DO PRODUTO - SOBREMESA 2 -->
+
+      <!-- INÍCIO DO PRODUTO - SOBREMESA 3 -->
+      <article class="card product-card" data-reveal>
+        <div class="card-image">
+          <!-- Troque a imagem abaixo -->
+          <img src="https://images.unsplash.com/photo-1624353365286-3f8d62daad51?auto=format&fit=crop&w=800&q=80" alt="Petit Gateau" loading="lazy">
+          <span class="card-badge badge-new">Novo</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Açai na garrafa com mousse</h3>
+          <p class="card-desc">Açai natural em uma garrafa de 300ml com mousse cremoso .</p>
+          <div class="card-footer">
+            <span class="card-price">R$ 22,90</span>
+            <a href="https://wa.me/5571985549179?text=Quero%20pedir%20o%20Açai%20na%20garrafa%20com%20mousse!" target="_blank" rel="noopener" class="card-btn">Pedir <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+      <!-- FIM DO PRODUTO - SOBREMESA 3 -->
+
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================
+     CONTATO
+     Edite endereço, horário, telefone e o mapa aqui.
+==================================================================== -->
+<section id="contato" class="section contact-section">
+  <div class="container">
+    <div class="section-header" data-reveal>
+      <span class="section-eyebrow">Fale Conosco</span>
+      <h2 class="section-title">Onde Estamos</h2>
+      <p class="section-subtitle">Venha nos visitar ou peça sem sair de casa.</p>
+    </div>
+
+    <div class="contact-grid" data-reveal>
+
+      <div class="contact-info glass">
+        <div class="contact-item">
+          <i class="fa-solid fa-location-dot"></i>
+          <div>
+            <h4>Endereço</h4>
+            <!-- SEU ENDEREÇO AQUI -->
+            <p>Rua Antônio vidal da cunha, 172, Santa Cruz</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <i class="fa-solid fa-clock"></i>
+          <div>
+            <h4>Horário de Funcionamento</h4>
+            <!-- SEU HORARIO AQUI -->
+            <p>Todos os dias das 00:00 as 07:00 e das 11:45 as 23:59<br>
+          </div>
+        </div>
+        <div class="contact-item">
+        </div>
+        <div class="contact-item">
+          <i class="fa-brands fa-instagram"></i>
+          <div>
+            <h4>Instagram</h4>
+            <!-- SEU INSTAGRAM AQUI -->
+            <p><a href="https://www.instagram.com/beli.burger_?igsh=eHY5YWN6ZG5uYm8z" target="_blank" rel="noopener">@Beli.Burger</a></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAPA: SEU MAPA AQUI - troque o src do iframe pelo link do seu endereço no Google Maps -->
+      <div class="contact-map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.54166142577!2d-38.47877612388514!3d-13.00114098731689!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7161b50f6cc781b%3A0x695146dad38a50d1!2sR.%20Ant%C3%B4nio%20Vidal%20da%20Cunha%2C%20172%20-%20Santa%20Cruz%2C%20Salvador%20-%20BA%2C%2041927-255!5e0!3m2!1spt-BR!2sbr!4v1783923508471!5m2!1spt-BR!2sbr"
+          width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" title="Mapa de localização">
+        </iframe>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================
+     RODAPÉ
+==================================================================== -->
+<footer class="footer">
+  <div class="container footer-container">
+
+    <div class="footer-brand">
+      <!-- NOME DA MARCA -->
+      <h3><span class="logo-icon">🔥</span> Beli Burger</h3>
+      <p>Hambúrgueres artesanais grelhados na brasa, feitos com ingredientes selecionados todos os dias.</p>
+
+    <div class="footer-links">
+      <h4>Navegação</h4>
+      <ul>
+        <li><a href="#cardapio">Cardápio</a></li>
+        <li><a href="#combos">Combos</a></li>
+        <li><a href="#porcoes">Porções</a></li>
+        <li><a href="#bebidas">Bebidas</a></li>
+        <li><a href="#sobremesas">Sobremesas</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+</footer>
+
+<!-- ====================================================================
+     BOTÕES FLUTUANTES
+==================================================================== -->
+<!-- Botão flutuante do iFood -->
+<a href="https://oia.99app.com/dlp9/GP9cfx" target="_blank" rel="noopener" class="ifood-float" aria-label="Peça pelo iFood">
+  <i class="fa-solid fa-utensils"></i>
+</a>
+<!-- Botão flutuante do WhatsApp -->
+<a href="https://wa.me/5571985549179" target="_blank" rel="noopener" class="whatsapp-float" aria-label="Fale conosco no WhatsApp">
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<!-- Botão voltar ao topo -->
+<button id="back-to-top" aria-label="Voltar ao topo">
+  <i class="fa-solid fa-arrow-up"></i>
+</button>
+
+<!-- Script próprio -->
+<script src="script.js"></script>
+</body>
+</html>
