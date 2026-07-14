@@ -16,21 +16,6 @@
 ==================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
-
-  /* ==================================================================
-     1. LOADING SCREEN
-     Esconde a tela de carregamento assim que a página termina de
-     carregar (com um pequeno atraso mínimo para não "piscar").
-  ================================================================== */
-  const loadingScreen = document.getElementById('loading-screen');
-
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      loadingScreen.classList.add('hidden');
-    }, 600); // tempo mínimo exibindo o loader, em milissegundos
-  });
-
-
   /* ==================================================================
      2. NAVBAR — muda de transparente para sólida ao rolar a página
      e controla a abertura/fechamento do menu mobile.
